@@ -1,5 +1,5 @@
 class JTime {
-    constructor(time) {
+    constructor() {
         this._milliseconds = {
             second: 1000,
         };
@@ -12,6 +12,14 @@ class JTime {
             day: 1440,
             hour: 60,
         };
+
+        let time;
+        if(arguments.length === 2) {
+            this._dateSeconds = this._fromJDate(arguments[0]);
+            time = arguments[1];
+        } else {
+            time = arguments[0];
+        }
 
         /*if(time === undefined) {
             this._daySeconds = JTime._currentUnix();
@@ -57,11 +65,11 @@ class JTime {
         return Date.UTC(date[2], date[1], date[0]) / this._milliseconds.second;
     }
     _fromDateSeconds(date) {
-        let date = new Date(date * 1000);
+        let dateObj = new Date(date * 1000);
 
-        let year = date.getUTCFullYear();
-        let month = date.getUTCMonth();
-        let day = date.getUTCDay();
+        let year = dateObj.getUTCFullYear();
+        let month = dateObj.getUTCMonth();
+        let day = dateObj.getUTCDay();
 
         return [month, day, year];
     }
